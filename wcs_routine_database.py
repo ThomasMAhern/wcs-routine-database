@@ -120,5 +120,6 @@ st.dataframe(routine_vids,
              column_config={"url": st.column_config.LinkColumn()})
 
 
-st.write(yt_scrapings.pipe(just_a_peek))
-st.write(fabio_efforts.pipe(just_a_peek))
+df.pipe(just_a_peek)
+yt_scrapings.pipe(just_a_peek)
+fabio_efforts.pipe(just_a_peek)
