@@ -53,7 +53,7 @@ def load_routine_data():
                            fabio_efforts
                            ], 
                           how='diagonal_relaxed')
-                .with_row_index(offset=1)
+                # .with_row_index(offset=1)
                 # .with_columns(
                 #             #   extracted_date = pl.concat_list(pl.col('Title').str.extract_all(pattern_yyyy_mm_dd),
                 #             #                                 pl.col('Title').str.extract_all(pattern_yyyy_dd_mm),
@@ -88,7 +88,6 @@ def load_routine_data():
                                                 
                                 
                 #                 )
-                .collect()
                 )
 
 
@@ -98,7 +97,7 @@ video_txt_search = st.text_input("Routine title search:").lower().split(',')
 
 
 routine_vids = (df
-                .filter(pl.col('Title').str.contains_any(video_txt_search, ascii_case_insensitive=True),
+                .filter(pl.col(pl.String).str.contains_any(video_txt_search, ascii_case_insensitive=True),
                       )
                 .with_columns(search_terms = pl.col('Title')
                                                 .str.to_lowercase()
@@ -121,6 +120,6 @@ st.dataframe(routine_vids,
              column_config={"url": st.column_config.LinkColumn()})
 
 
-df.pipe(just_a_peek)
-yt_scrapings.pipe(just_a_peek)
-fabio_efforts.pipe(just_a_peek)
+# df.pipe(just_a_peek)
+# yt_scrapings.pipe(just_a_peek)
+# fabio_efforts.pipe(just_a_peek)
