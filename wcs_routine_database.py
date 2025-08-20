@@ -37,6 +37,8 @@ pattern_mm_dd = r'\b(?:0[1-9]|1[0-2])[-/. ](?:0[1-9]|[12]\d|3[01])\b'
 pattern_yyyy = r'\b(19\d{2}|20\d{2})\b' # 1999 or 2025
 pattern_apos_yy = r"'\d{2}\b" # '98 or '25
 
+pattern_placement = r'\b([1-9]|1[0-9]|20)(st|nd|rd|th)\b' #1st 2nd etc
+
 pattern_month_year_or_reversed = r"\b(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* \d{4}|\d{4} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*)\b"
 
 yt_scrapings = pl.scan_csv('routine_videos.csv')
@@ -55,6 +57,8 @@ categories = ['cabaret',
             'team routine',
             'team',
             'young adult',]
+
+placements = ['1st', '2nd', '3rd', '4th', 5th]
 
 
 def just_a_peek(df_):
@@ -135,6 +139,11 @@ routine_vids = (df
                              category = pl.concat_str(pl.all(), separator=' ', ignore_nulls=True)
                                                 .str.to_lowercase()
                                                 .str.extract_all('|'.join(categories))
+                                                .list.unique()
+                                                .list.drop_nulls(),
+                             placements = pl.concat_str(pl.all(), separator=' ', ignore_nulls=True)
+                                                .str.to_lowercase()
+                                                .str.extract_all(placements)
                                                 .list.unique()
                                                 .list.drop_nulls(),
                               )
