@@ -54,39 +54,39 @@ def load_routine_data():
                            ], 
                           how='diagonal_relaxed')
                 .with_row_index(offset=1)
-                .with_columns(extracted_date = pl.concat_list(pl.col('Title').str.extract_all(pattern_yyyy_mm_dd),
-                                                            pl.col('Title').str.extract_all(pattern_yyyy_dd_mm),
-                                                            pl.col('Title').str.extract_all(pattern_dd_mm_yyyy),
-                                                            pl.col('Title').str.extract_all(pattern_mm_dd_yyyy),
+                # .with_columns(extracted_date = pl.concat_list(pl.col('Title').str.extract_all(pattern_yyyy_mm_dd),
+                #                                             pl.col('Title').str.extract_all(pattern_yyyy_dd_mm),
+                #                                             pl.col('Title').str.extract_all(pattern_dd_mm_yyyy),
+                #                                             pl.col('Title').str.extract_all(pattern_mm_dd_yyyy),
 
-                                                            pl.col('Title').str.extract_all(pattern_yy_mm_dd),
-                                                            pl.col('Title').str.extract_all(pattern_yy_dd_mm),
-                                                            pl.col('Title').str.extract_all(pattern_dd_mm_yy),
-                                                            pl.col('Title').str.extract_all(pattern_mm_dd_yy),
+                #                                             pl.col('Title').str.extract_all(pattern_yy_mm_dd),
+                #                                             pl.col('Title').str.extract_all(pattern_yy_dd_mm),
+                #                                             pl.col('Title').str.extract_all(pattern_dd_mm_yy),
+                #                                             pl.col('Title').str.extract_all(pattern_mm_dd_yy),
 
-                                                            pl.col('Title').str.extract_all(pattern_dd_MMM_yyyy),
-                                                            pl.col('Title').str.extract_all(pattern_MMM_dd_yyyy),
-                                                            pl.col('Title').str.extract_all(pattern_yyyy_MMM_dd),
-                                                            pl.col('Title').str.extract_all(pattern_yyyy_dd_MMM),
+                #                                             pl.col('Title').str.extract_all(pattern_dd_MMM_yyyy),
+                #                                             pl.col('Title').str.extract_all(pattern_MMM_dd_yyyy),
+                #                                             pl.col('Title').str.extract_all(pattern_yyyy_MMM_dd),
+                #                                             pl.col('Title').str.extract_all(pattern_yyyy_dd_MMM),
 
-                                                            pl.col('Title').str.extract_all(pattern_dd_MMM_yy),
-                                                            pl.col('Title').str.extract_all(pattern_yy_MMM_dd),
-                                                            # pl.col('Title').str.extract_all(pattern_MMM_dd_yy), #matches on Jul 2024 as a date :(
-                                                            # pl.col('Title').str.extract_all(pattern_yy_dd_MMM),  #matches on 2024 Jul as a date :(
+                #                                             pl.col('Title').str.extract_all(pattern_dd_MMM_yy),
+                #                                             pl.col('Title').str.extract_all(pattern_yy_MMM_dd),
+                #                                             # pl.col('Title').str.extract_all(pattern_MMM_dd_yy), #matches on Jul 2024 as a date :(
+                #                                             # pl.col('Title').str.extract_all(pattern_yy_dd_MMM),  #matches on 2024 Jul as a date :(
 
-                                                            # pl.col('Title').str.extract_all(pattern_mm_yy),
-                                                            # pl.col('Title').str.extract_all(pattern_dd_mm),
-                                                            # pl.col('Title').str.extract_all(pattern_yy_mm),
-                                                            # pl.col('Title').str.extract_all(pattern_mm_dd),
-                                                            )
-                                                .list.unique()
-                                                .list.drop_nulls(),
-                                extracted_year = pl.concat_list(pl.col(pl.String).str.extract_all(pattern_yyyy),
-                                                                pl.col(pl.String).str.extract_all(pattern_apos_yy),
-                                                                )
+                #                                             # pl.col('Title').str.extract_all(pattern_mm_yy),
+                #                                             # pl.col('Title').str.extract_all(pattern_dd_mm),
+                #                                             # pl.col('Title').str.extract_all(pattern_yy_mm),
+                #                                             # pl.col('Title').str.extract_all(pattern_mm_dd),
+                #                                             )
+                #                                 .list.unique()
+                #                                 .list.drop_nulls(),
+                #                 extracted_year = pl.concat_list(pl.col(pl.String).str.extract_all(pattern_yyyy),
+                #                                                 pl.col(pl.String).str.extract_all(pattern_apos_yy),
+                #                                                 )
                                                 
                                 
-                                )
+                #                 )
                 )
 
 
