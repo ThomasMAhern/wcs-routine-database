@@ -44,6 +44,7 @@ fabio_efforts = pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url',
                                                                  'Year':'year'})
 
 categories = ['cabaret',
+              'routine',
             'classic',
             'honorable mention',
             'juniors routine',
