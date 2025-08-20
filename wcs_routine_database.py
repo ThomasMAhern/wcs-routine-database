@@ -53,7 +53,7 @@ categories = ['cabaret',
             'rising star',
             'showcase',
             'team routine',
-            'teams',
+            'team',
             'young adult',]
 
 
