@@ -88,7 +88,7 @@ def load_routine_data():
         
         
         
-df2 = pl.read_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'}), 
+df2 = pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'})._fetch(), 
                     #   how='diagonal_relaxed', on='url')
 
 df = load_routine_data()
