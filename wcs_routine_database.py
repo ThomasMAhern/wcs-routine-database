@@ -50,51 +50,49 @@ def load_routine_data():
         return (pl.scan_csv('routine_videos.csv', 
                                 # low_memory=True
                             )
+                pl.concat([pl.scan_csv('routine_videos.csv'), 
+                           pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'})
+                           ], 
+                          how='diagonal_relaxed')
                 .with_row_index(offset=1)
-                .with_columns(extracted_date = pl.concat_list(pl.col('Title').str.extract_all(pattern_yyyy_mm_dd),
-                                                            pl.col('Title').str.extract_all(pattern_yyyy_dd_mm),
-                                                            pl.col('Title').str.extract_all(pattern_dd_mm_yyyy),
-                                                            pl.col('Title').str.extract_all(pattern_mm_dd_yyyy),
+                .with_columns(
+                            #   extracted_date = pl.concat_list(pl.col('Title').str.extract_all(pattern_yyyy_mm_dd),
+                            #                                 pl.col('Title').str.extract_all(pattern_yyyy_dd_mm),
+                            #                                 pl.col('Title').str.extract_all(pattern_dd_mm_yyyy),
+                            #                                 pl.col('Title').str.extract_all(pattern_mm_dd_yyyy),
 
-                                                            pl.col('Title').str.extract_all(pattern_yy_mm_dd),
-                                                            pl.col('Title').str.extract_all(pattern_yy_dd_mm),
-                                                            pl.col('Title').str.extract_all(pattern_dd_mm_yy),
-                                                            pl.col('Title').str.extract_all(pattern_mm_dd_yy),
+                            #                                 pl.col('Title').str.extract_all(pattern_yy_mm_dd),
+                            #                                 pl.col('Title').str.extract_all(pattern_yy_dd_mm),
+                            #                                 pl.col('Title').str.extract_all(pattern_dd_mm_yy),
+                            #                                 pl.col('Title').str.extract_all(pattern_mm_dd_yy),
 
-                                                            pl.col('Title').str.extract_all(pattern_dd_MMM_yyyy),
-                                                            pl.col('Title').str.extract_all(pattern_MMM_dd_yyyy),
-                                                            pl.col('Title').str.extract_all(pattern_yyyy_MMM_dd),
-                                                            pl.col('Title').str.extract_all(pattern_yyyy_dd_MMM),
+                            #                                 pl.col('Title').str.extract_all(pattern_dd_MMM_yyyy),
+                            #                                 pl.col('Title').str.extract_all(pattern_MMM_dd_yyyy),
+                            #                                 pl.col('Title').str.extract_all(pattern_yyyy_MMM_dd),
+                            #                                 pl.col('Title').str.extract_all(pattern_yyyy_dd_MMM),
 
-                                                            pl.col('Title').str.extract_all(pattern_dd_MMM_yy),
-                                                            pl.col('Title').str.extract_all(pattern_yy_MMM_dd),
-                                                            # pl.col('Title').str.extract_all(pattern_MMM_dd_yy), #matches on Jul 2024 as a date :(
-                                                            # pl.col('Title').str.extract_all(pattern_yy_dd_MMM),  #matches on 2024 Jul as a date :(
+                            #                                 pl.col('Title').str.extract_all(pattern_dd_MMM_yy),
+                            #                                 pl.col('Title').str.extract_all(pattern_yy_MMM_dd),
+                            #                                 # pl.col('Title').str.extract_all(pattern_MMM_dd_yy), #matches on Jul 2024 as a date :(
+                            #                                 # pl.col('Title').str.extract_all(pattern_yy_dd_MMM),  #matches on 2024 Jul as a date :(
 
-                                                            # pl.col('Title').str.extract_all(pattern_mm_yy),
-                                                            # pl.col('Title').str.extract_all(pattern_dd_mm),
-                                                            # pl.col('Title').str.extract_all(pattern_yy_mm),
-                                                            # pl.col('Title').str.extract_all(pattern_mm_dd),
-                                                            )
-                                                .list.unique()
-                                                .list.drop_nulls(),
-                                extracted_year = pl.concat_list(pl.col('Title').str.extract_all(pattern_yyyy),
-                                                                pl.col('Title').str.extract_all(pattern_apos_yy),
+                            #                                 # pl.col('Title').str.extract_all(pattern_mm_yy),
+                            #                                 # pl.col('Title').str.extract_all(pattern_dd_mm),
+                            #                                 # pl.col('Title').str.extract_all(pattern_yy_mm),
+                            #                                 # pl.col('Title').str.extract_all(pattern_mm_dd),
+                            #                                 )
+                            #                     .list.unique()
+                            #                     .list.drop_nulls(),
+                                extracted_year = pl.concat_list(pl.all()).str.extract_all(pattern_yyyy),
+                                                                pl.all().str.extract_all(pattern_apos_yy),
                                                                 )
                                                 
                                 
                                 )
                 )
-@st.cache_resource #makes it so streamlit doesn't have to reload for every sesson.
-def load_fabio_data():
-        return (pl.scan_csv('Fabio_Routine_Archive.csv')
-                .rename({'Link':'url'})
-                )
-
 
 
 df = load_routine_data()
-df_fabio = load_fabio_data()
 
 video_txt_search = st.text_input("Routine title search:").lower().split(',')
 
@@ -119,12 +117,5 @@ routine_vids = (df
                 
                 )
 
-
-
-
-
-st.dataframe(pl.concat([routine_vids, df_fabio], how='diagonal_relaxed'), 
+st.dataframe(routine_vids, 
              column_config={"url": st.column_config.LinkColumn()})
-
-# st.dataframe(df_fabio.collect(), 
-#              column_config={"url": st.column_config.LinkColumn()})
