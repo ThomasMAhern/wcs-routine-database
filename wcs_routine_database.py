@@ -113,6 +113,7 @@ routine_vids = (df
                                                 .list.drop_nulls()
                                                 .list.len(),
                               )
+                .pipe(just_a_peek)
                 .sort(pl.col('terms_count'), descending=True)
                 
                 )
