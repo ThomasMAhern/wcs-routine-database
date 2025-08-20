@@ -46,7 +46,7 @@ def just_a_peek(df_):
         return df_
     
 @st.cache_resource #makes it so streamlit doesn't have to reload for every sesson.
-def load_playlist_data():
+def load_routine_data():
         return (pl.scan_csv('routine_videos.csv', 
                                 # low_memory=True
                             )
@@ -88,10 +88,10 @@ def load_playlist_data():
         
         
         
-df2 = pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'}), 
+df2 = pl.read_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'}), 
                     #   how='diagonal_relaxed', on='url')
 
-df = load_playlist_data()
+df = load_routine_data()
 
 video_txt_search = st.text_input("Routine title search:").lower().split(',')
 
