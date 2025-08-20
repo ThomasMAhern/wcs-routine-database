@@ -86,6 +86,11 @@ def load_playlist_data():
                                 )
                 )
         
+        
+        
+df2 = pl.scan_csv('Fabio_Routine_Archive.csv').rename('Link':'url'), 
+                    #   how='diagonal_relaxed', on='url')
+
 df = load_playlist_data()
 
 video_txt_search = st.text_input("Routine title search:").lower().split(',')
@@ -116,3 +121,5 @@ routine_vids = (df
 
 st.dataframe(routine_vids, 
              column_config={"url": st.column_config.LinkColumn()})
+
+st.dataframe(df2)
