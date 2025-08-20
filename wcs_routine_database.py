@@ -47,10 +47,7 @@ def just_a_peek(df_):
     
 @st.cache_resource #makes it so streamlit doesn't have to reload for every sesson.
 def load_routine_data():
-        return (pl.scan_csv('routine_videos.csv', 
-                                # low_memory=True
-                            )
-                pl.concat([pl.scan_csv('routine_videos.csv'), 
+        return (pl.concat([pl.scan_csv('routine_videos.csv'), 
                            pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'})
                            ], 
                           how='diagonal_relaxed')
