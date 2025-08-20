@@ -97,12 +97,13 @@ routine_vids = (df
                                                 .str.to_lowercase()
                                                 .str.extract_all('|'.join(video_txt_search))
                                                 .list.unique()
+                                                .list.drop_nulls()
                                                 .list.sort(),
                               terms_count = pl.col('Title')
                                                 .str.to_lowercase()
                                                 .str.extract_all('|'.join(video_txt_search))
                                                 .list.unique()
-                                                .list.drop_nulls
+                                                .list.drop_nulls()
                                                 .list.len(),
                               )
                 .sort(pl.col('terms_count'), descending=True)
