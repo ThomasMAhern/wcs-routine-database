@@ -87,7 +87,9 @@ def load_routine_data():
                 )
 @st.cache_resource #makes it so streamlit doesn't have to reload for every sesson.
 def load_fabio_data():
-        return pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'}), 
+        return (pl.scan_csv('Fabio_Routine_Archive.csv')
+                .rename({'Link':'url'})
+                )
 
 
 
