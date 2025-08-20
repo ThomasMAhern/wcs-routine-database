@@ -143,7 +143,7 @@ routine_vids = (df
                                                 .list.drop_nulls(),
                              placements = pl.concat_str(pl.all(), separator=' ', ignore_nulls=True)
                                                 .str.to_lowercase()
-                                                .str.extract_all(placements)
+                                                .str.extract_all('|'.join(placements))
                                                 .list.unique()
                                                 .list.drop_nulls(),
                               )
