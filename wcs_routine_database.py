@@ -80,8 +80,8 @@ def load_routine_data():
                             #                                 )
                             #                     .list.unique()
                             #                     .list.drop_nulls(),
-                                extracted_year = pl.concat_list(pl.all().str.extract_all(pattern_yyyy),
-                                                                pl.all().str.extract_all(pattern_apos_yy),
+                                extracted_year = pl.concat_list(pl.all(pl.String).str.extract_all(pattern_yyyy),
+                                                                pl.all(pl.String).str.extract_all(pattern_apos_yy),
                                                                 )
                                                 
                                 
