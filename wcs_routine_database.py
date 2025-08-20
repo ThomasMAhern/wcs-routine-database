@@ -96,8 +96,8 @@ video_txt_search = st.text_input("Routine title search:").lower().split(',')
 
 
 routine_vids = (df
-                # .with_columns(errthang = pl.concat_str(pl.all().cast(pl.String), separator=' '))
-                .filter(pl.concat_str(pl.col('Title')).str.contains_any(video_txt_search, ascii_case_insensitive=True),
+                .with_columns(errthang = pl.concat_str(pl.all().cast(pl.String), separator=' '))
+                .filter(pl.concat_str(pl.col('errthang')).str.contains_any(video_txt_search, ascii_case_insensitive=True),
                       )
                 .with_columns(search_terms = pl.col('Title')
                                                 .str.to_lowercase()
