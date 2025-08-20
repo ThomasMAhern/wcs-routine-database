@@ -95,7 +95,7 @@ routine_vids = (df
                       )
                 .with_columns(search_terms = pl.col('Title')
                                                 .str.to_lowercase()
-                                                .str.extract_all(video_txt_search, ascii_case_insensitive=True)
+                                                .str.extract_all(video_txt_search)
                                                 .list.unique()
                                                 .list.sort(),
                               )
