@@ -40,7 +40,7 @@ pattern_apos_yy = r"'\d{2}\b" # '98 or '25
 pattern_month_year_or_reversed = r"\b(?:(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* \d{4}|\d{4} (?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*)\b"
 
 yt_scrapings = pl.scan_csv('routine_videos.csv')
-fabio_efforts = pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'})
+fabio_efforts = pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'}).with_columns(Title = pl.lit(''))
 
 def just_a_peek(df_):
         '''just peeks at the df where it is'''
