@@ -85,13 +85,12 @@ def load_routine_data():
                                 
                                 )
                 )
-        
-        
-        
-df2 = pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'})._fetch(), 
-                    #   how='diagonal_relaxed', on='url')
+@st.cache_resource #makes it so streamlit doesn't have to reload for every sesson.
+def load_fabio_data():
+        return pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'}), 
 
 df = load_routine_data()
+df_fabio = load_fabio_data()
 
 video_txt_search = st.text_input("Routine title search:").lower().split(',')
 
@@ -122,4 +121,4 @@ routine_vids = (df
 st.dataframe(routine_vids, 
              column_config={"url": st.column_config.LinkColumn()})
 
-st.dataframe(df2)
+st.dataframe(df_fabio)
