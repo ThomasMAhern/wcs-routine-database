@@ -88,6 +88,7 @@ def load_routine_data():
                                                 
                                 
                 #                 )
+                .collect()
                 )
 
 
