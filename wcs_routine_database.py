@@ -91,7 +91,7 @@ video_txt_search = st.text_input("Routine title search:").lower().split(',')
 
 
 routine_vids = (df
-                filter(pl.col('Title').str.contains_any(only_fabulous_people, ascii_case_insensitive=True),
+                .filter(pl.col('Title').str.contains_any(only_fabulous_people, ascii_case_insensitive=True),
                       )
                 )
 
