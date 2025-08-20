@@ -96,10 +96,10 @@ routine_vids = (df
                 .with_columns(search_terms = pl.col('Title')
                                                 .str.to_lowercase()
                                                 .str.extract_all(video_txt_search)
-                                                .list.unique()
-                                                .list.sort(),
+                                                # .list.unique()
+                                                # .list.sort(),
                               )
-                .sort(pl.col('search_terms').list.len(), descending=True)
+                # .sort(pl.col('search_terms').list.len(), descending=True)
                 
                 )
 
