@@ -58,7 +58,7 @@ categories = ['cabaret',
             'team',
             'young adult',]
 
-placements = ['1st', '2nd', '3rd', '4th', 5th]
+placements = ['1st', '2nd', '3rd', '4th', '5th']
 
 
 def just_a_peek(df_):
