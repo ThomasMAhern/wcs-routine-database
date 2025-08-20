@@ -99,7 +99,7 @@ video_txt_search = st.text_input("Routine title search:").lower().split(',')
 routine_vids = (df
                 .filter(pl.concat_str(pl.all(), separator=' ', ignore_nulls=True).str.contains_any(video_txt_search, ascii_case_insensitive=True),
                        )
-                .with_columns(, 
+                .with_columns( 
                             #   pl.when(pl.col('date').eq(''))
                             #     .then(pl.lit('unk')),
                                 
