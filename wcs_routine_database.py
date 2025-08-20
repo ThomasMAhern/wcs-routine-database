@@ -123,7 +123,7 @@ routine_vids = (df
 
 
 
-st.dataframe(pl.concat([routine_vids, df_fabio], how='diagonal_relaxed', on='url'), 
+st.dataframe(pl.concat([routine_vids, df_fabio], how='diagonal_relaxed'), 
              column_config={"url": st.column_config.LinkColumn()})
 
 # st.dataframe(df_fabio.collect(), 
