@@ -43,6 +43,19 @@ yt_scrapings = pl.scan_csv('routine_videos.csv')
 fabio_efforts = pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url',
                                                                  'Year':'year'})
 
+categories = ['cabaret',
+            'classic',
+            'honorable mention',
+            'juniors routine',
+            'masters',
+            'pro am', 'proam',
+            'rising star',
+            'showcase',
+            'team routine',
+            'teams',
+            'young adult',]
+
+
 def just_a_peek(df_):
         '''just peeks at the df where it is'''
         st.write(df_.schema)
@@ -118,8 +131,13 @@ routine_vids = (df
                                                 .list.unique()
                                                 .list.drop_nulls()
                                                 .list.len(),
-                              
+                             category = pl.concat_str(pl.all(), separator=' ', ignore_nulls=True)
+                                                .str.to_lowercase()
+                                                .str.extract_all('|'.join(categories))
+                                                .list.unique()
+                                                .list.drop_nulls(),
                               )
+                # .with_columns(pl.col('Category'))
                 .sort(pl.col('terms_count'), descending=True)
                 
                 )
