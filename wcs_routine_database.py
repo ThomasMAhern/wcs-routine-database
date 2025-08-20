@@ -50,6 +50,7 @@ def load_playlist_data():
         return (pl.scan_csv('routine_videos.csv', 
                                 # low_memory=True
                             )
+                .with_row_index(offset=1)
                 .with_columns(extracted_date = pl.concat_list(pl.col('Title').str.extract_all(pattern_yyyy_mm_dd),
                                                             pl.col('Title').str.extract_all(pattern_yyyy_dd_mm),
                                                             pl.col('Title').str.extract_all(pattern_dd_mm_yyyy),
