@@ -93,18 +93,19 @@ video_txt_search = st.text_input("Routine title search:").lower().split(',')
 routine_vids = (df
                 .filter(pl.col('Title').str.contains_any(video_txt_search, ascii_case_insensitive=True),
                       )
-                .select(search_terms = pl.col('Title')
-                                        .str.to_lowercase()
-                                        .str.extract_all('|'.join(video_txt_search))
-                                        .list.unique()
-                                        .list.sort(),
-                        terms_count = pl.col('Title')
-                                        .str.to_lowercase()
-                                        .str.extract_all('|'.join(video_txt_search))
-                                        .list.unique()
-                                        .list.len(),
-                        pl.all(),
-                        )
+                .with_columns(search_terms = pl.col('Title')
+                                                .str.to_lowercase()
+                                                .str.extract_all('|'.join(video_txt_search))
+                                                .list.unique()
+                                                .list.sort(),
+                              terms_count = pl.col('Title')
+                                                .str.to_lowercase()
+                                                .str.extract_all('|'.join(video_txt_search))
+                                                .list.unique()
+                                                .list.len(),
+                              )
+                .select('search_terms', 'terms_count', 
+                        pl.all().exclude('search_terms', 'terms_count'))
                 .sort(pl.col('terms_count'), descending=True)
                 
                 )
