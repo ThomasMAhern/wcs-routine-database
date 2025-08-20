@@ -89,6 +89,8 @@ def load_routine_data():
 def load_fabio_data():
         return pl.scan_csv('Fabio_Routine_Archive.csv').rename({'Link':'url'}), 
 
+
+
 df = load_routine_data()
 df_fabio = load_fabio_data()
 
@@ -121,4 +123,5 @@ routine_vids = (df
 st.dataframe(routine_vids, 
              column_config={"url": st.column_config.LinkColumn()})
 
-st.dataframe(df_fabio)
+st.dataframe(df_fabio.collect(), 
+             column_config={"url": st.column_config.LinkColumn()})
