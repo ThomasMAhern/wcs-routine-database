@@ -116,7 +116,10 @@ routine_vids = (df
                 )
 
 st.dataframe(routine_vids, 
-             column_config={"url": st.column_config.LinkColumn()})
+             column_config={"url": st.column_config.LinkColumn(),
+                            'Account': st.column_config.LinkColumn()
+                            }
+             )
 
 
 # df.pipe(just_a_peek)
