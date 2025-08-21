@@ -142,7 +142,9 @@ wsdc_events = ['4th of july convention', '4th of july swing bash', '5280 swing d
           'westie pink city', 'westie spring thing', "westie's angels", 'westies on the water', 'westy nantes', 'wild wild westie', 'windy city', 'wcs international rally',
           'winter coast swing', 'winter white', 'winter white wcs', 'winter white west coast swing', 'wisconsin dance challenge/midwest area swing dance challenge', 
           'world hustle dance championships', 'world swing dance championships', 'world swing masters', 'worlds ucwdc', 'xanadu - midwinter dance celebration',
-          'euro dance festival', 'eurodance festival', 'ggp', 'choreo camp', 'capital swing classic', 'awcso',
+          'euro dance festival', 'eurodance festival', 'ggp', 'global grand prix', 'choreo camp', 'capital swing classic', 'capital swing', 'awcso', 'pfw', 'csc', 
+          'uk champs', 'austin swing dance championships', 'csdc', 'kiwifest', 'dutch open', 'wotp', 'rcs', 
+          'raw con',
           ]
 
 
